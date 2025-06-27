@@ -53,7 +53,7 @@ test('Verify users can buy an item successfully', async ({ page }) => {
     state: "CA",
     zipCode: "90001",
     phone: "1234567890",
-    email: "john.doe@example.com",
+    email: "john.doe@example.com123",
 };
 
   await checkoutPage.fillInfo(checkoutInfo);
