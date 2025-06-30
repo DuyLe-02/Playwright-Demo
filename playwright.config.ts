@@ -11,6 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+require('dotenv').config();
 export default defineConfig({
   timeout: 120_000,
   testDir: './tests',

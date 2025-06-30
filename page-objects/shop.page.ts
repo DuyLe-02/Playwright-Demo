@@ -3,8 +3,9 @@ import { expect, Locator, Page } from "@playwright/test";
 
 export class ShopPage {
 
-    private addButton = this.page.getByRole('button', { name: 'Add to Cart' });
+    readonly addButton = this.page.getByRole('button', { name: 'Add to Cart' });
     readonly cart = this.page.getByRole('link').filter({hasText: '$'});
+    
     constructor(private page: Page) {}
 
    async addToCart(productName: string): Promise<void> {

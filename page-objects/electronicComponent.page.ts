@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
 
 export class ElectronicComponentPage {
+
     readonly productGrid = this.page.locator(".products.products-grid");
     readonly productList = this.page.locator(".products.products-list");
     readonly typeList = this.page.locator(".switch-list");
@@ -8,6 +9,7 @@ export class ElectronicComponentPage {
     readonly cart = this.page.getByRole('link').filter({hasText: '$'});
 
     constructor(private page: Page) {}
+  
 
     async addToCart(productName: string): Promise<void> {
         const product = this.page.getByRole("link", { name: productName, exact: true });
