@@ -1,15 +1,17 @@
 import { Locator, Page } from "@playwright/test";
 
 export class WelcomePage {
-    readonly login_signupTab = this.page.getByRole("link", {name: "Log in / Sign up"});;
+  readonly login_signupTab = this.page.getByRole("link", {
+    name: "Log in / Sign up",
+  });
 
-    constructor(private page: Page) {}
+  constructor(private page: Page) {}
 
-    async navigate() {
-        await this.page.goto("https://demo.testarchitect.com/")
-    }
+  async navigate() {
+    await this.page.goto("https://demo.testarchitect.com/");
+  }
 
-    async clickLoginTab() {
-        await this.login_signupTab.click();
-    }
+  async clickLoginTab() {
+    await this.login_signupTab.click();
+  }
 }

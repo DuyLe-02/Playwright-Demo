@@ -1,20 +1,34 @@
 import { Locator, Page } from "@playwright/test";
 
-export default class MyAccountPage {
-    readonly allDepartmentSection = this.page.locator("//span[text() = 'All departments']");
-    readonly electronicComponent  = this.page.locator("//div[@class='secondary-menu-wrapper']//a[text()='Electronic Components & Supplies']");
-    readonly shopTab = this.page.locator("li[id='menu-item-5578']").nth(0);
-    
-    constructor(private page: Page) {}
+export class MyAccountPage {
+  readonly allDepartmentSection = this.page.locator(
+    "//span[text() = 'All departments']"
+  );
+  readonly electronicComponent = this.page.locator(
+    "//div[@class='secondary-menu-wrapper']//a[text()='Electronic Components & Supplies']"
+  );
+  readonly shopTab = this.page.locator("li[id='menu-item-5578']").nth(0);
 
-    async selectElectronicComponent() {
-        await this.allDepartmentSection.hover();
-        await this.electronicComponent.click()
-    }
+  // readonly orderTab = this.page.getByRole("link", { name: " Recent order" });
 
-    async clickShopTab() {
-        await this.shopTab.click();
-    }
+  readonly orderTab = this.page.locator(
+    "li.woocommerce-MyAccount-navigation-link--orders a"
+  );
 
-    //.products.products-list, .products.products-grid
+  constructor(private page: Page) {}
+
+  async selectElectronicComponent() {
+    await this.allDepartmentSection.hover();
+    await this.electronicComponent.click();
+  }
+
+  async clickShopTab() {
+    await this.shopTab.click();
+  }
+
+  async clickOrderTab() {
+    await this.orderTab.click();
+  }
+
+  //.products.products-list, .products.products-grid
 }

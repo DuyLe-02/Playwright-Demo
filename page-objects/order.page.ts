@@ -1,11 +1,12 @@
 import { expect, Locator, Page } from "@playwright/test";
 
 export class OrderPage {
-    readonly orderConfirmation = this.page.getByText('Thank you. Your order has been received.');
-    constructor(private page: Page) {}
+  readonly orderConfirmation = this.page.getByText(
+    "Thank you. Your order has been received."
+  );
+  constructor(private page: Page) {}
 
-    async login() {
-        await expect(this.orderConfirmation).toBeVisible();
-        
-    }
+  async login() {
+    await expect(this.orderConfirmation).toBeVisible();
+  }
 }
