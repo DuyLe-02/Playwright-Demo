@@ -14,7 +14,7 @@ export class CheckoutPage {
   readonly town_cityTextBox = this.page.locator("input[id='billing_city']");
   readonly stateDropdown = this.page.locator("select[id='billing_state']");
   readonly zipCodeTextBox = this.page.locator("input[id='billing_postcode']");
-  readonly phoneTextBox = this.page.getByRole("textbox", { name: "Phone" });
+  readonly phoneTextBox = this.page.locator("input[id='billing_phone']");
   readonly emailAddressTextBox = this.page.locator("input[id='billing_email']");
 
   readonly placeOrderButton = this.page.getByRole("button", {
@@ -45,14 +45,27 @@ export class CheckoutPage {
     await this.placeOrderButton.click();
   }
 
-  async pressTab() {
-    await this.page.keyboard.press("Tab");
+  async checkBorder(textBoxName: string) {
+    const locator = this.page.locator(`input[id='billing_${textBoxName}']`);
+
+    await expect
+      .poll(
+        async () => {
+          return await locator.evaluate(
+            (el) => getComputedStyle(el).borderColor
+          );
+        },
+        {
+          timeout: 3000, // optional: wait up to 3s
+        }
+      )
+      .toBe("rgb(198, 40, 40)"); // #c62828
   }
 
-  async checkBorder() {
-    const borderColor = await this.streetAddressTextbox.evaluate(
-      (el) => getComputedStyle(el).borderColor
+  async checkErrorMessage(fieldName: string) {
+    const errorMessage = this.page.locator(
+      `li[data-id='billing_${fieldName}']`
     );
-    expect(borderColor).toBe("rgb(198, 40, 40)"); // #c62828
+    await expect(errorMessage).toBeVisible();
   }
 }
