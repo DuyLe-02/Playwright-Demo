@@ -7,7 +7,7 @@ import { CartPage } from "src/pages/CartPage";
 import { CheckoutPage } from "src/pages/CheckoutPage";
 import { ShopPage } from "src/pages/ShopPage";
 import { OrderPage } from "src/pages/OrderPage";
-import { username, password } from "src/utils/env";
+import { url, username, password } from "src/utils/env";
 
 //Test case 1
 test("Verify users can buy an item successfully", async ({ page }) => {
@@ -19,7 +19,7 @@ test("Verify users can buy an item successfully", async ({ page }) => {
   const checkoutPage = new CheckoutPage(page);
 
   //1. Open browser and go to https://demo.testarchitect.com/
-  await welcomePage.navigate();
+  await welcomePage.navigate(url);
 
   //2. Login with valid credentials
   await welcomePage.clickLoginTab();

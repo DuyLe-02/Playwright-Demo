@@ -4,7 +4,6 @@ import { BasePage } from "./BasePage";
 export class ElectronicComponentPage extends BasePage {
   readonly productGrid = this.page.locator(".products.products-grid");
   readonly productList = this.page.locator(".products.products-list");
-  //readonly typeList = this.page.locator(".switch-list");
   readonly addButton = this.page.getByRole("button", { name: "Add to cart" });
   readonly cart = this.page.getByRole("link").filter({ hasText: "$" });
 

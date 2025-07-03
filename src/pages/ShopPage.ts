@@ -41,7 +41,6 @@ export class ShopPage extends BasePage {
 
     await this.sortComboBox.selectOption(sortType);
 
-    // Wait until the first product has changed (sort applied)
     await this.page.waitForFunction((oldText) => {
       const el = document.querySelector(".products .product");
       return el && el.textContent !== oldText;
@@ -56,7 +55,6 @@ export class ShopPage extends BasePage {
     for (let i = 0; i < count; i++) {
       const product = products.nth(i);
 
-      // First, try to get the price inside <ins> (new price)
       const salePrice = product.locator("ins .amount");
       const hasSalePrice = (await salePrice.count()) > 0;
 

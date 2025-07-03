@@ -9,8 +9,6 @@ export class MyAccountPage {
   );
   readonly shopTab = this.page.locator("li[id='menu-item-5578']").nth(0);
 
-  // readonly orderTab = this.page.getByRole("link", { name: " Recent order" });
-
   readonly orderTab = this.page.locator(
     "li.woocommerce-MyAccount-navigation-link--orders a"
   );
@@ -29,6 +27,4 @@ export class MyAccountPage {
   async clickOrderTab() {
     await this.orderTab.click();
   }
-
-  //.products.products-list, .products.products-grid
 }

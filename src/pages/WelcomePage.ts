@@ -7,8 +7,8 @@ export class WelcomePage {
 
   constructor(private page: Page) {}
 
-  async navigate() {
-    await this.page.goto("https://demo.testarchitect.com/");
+  async navigate(url: string) {
+    await this.page.goto(url);
   }
 
   async clickLoginTab() {

@@ -6,8 +6,8 @@ import { ElectronicComponentPage } from "src/pages/ElectronicComponentPage";
 import { CartPage } from "src/pages/CartPage";
 import { CheckoutPage } from "src/pages/CheckoutPage";
 import { ShopPage } from "src/pages/ShopPage";
-
-import { username, password } from "src/utils/env";
+import { ProductPage } from "src/pages/ProductPage";
+import { url, username, password } from "src/utils/env";
 
 //Test case 9
 test("Verify users can update quantity of product in cart", async ({
@@ -19,9 +19,11 @@ test("Verify users can update quantity of product in cart", async ({
   const checkoutPage = new CheckoutPage(page);
   const shopPage = new ShopPage(page);
   const loginPage = new LoginPage(page);
+  const electronicComponentPage = new ElectronicComponentPage(page);
+  const productPage = new ProductPage(page);
 
   //1. Open browser and go to https://demo.testarchitect.com/
-  await welcomePage.navigate();
+  await welcomePage.navigate(url);
 
   //2. Login with valid credentials
   await welcomePage.clickLoginTab();
@@ -29,17 +31,13 @@ test("Verify users can update quantity of product in cart", async ({
 
   //3. Go to Shop page
   await accountPage.clickShopTab();
-  await shopPage.goToCart();
 
   //4. Add a product
-  await cartPage.checkItemTable();
+  await electronicComponentPage.addToCart("Beats Solo3 Wireless On-Ear");
+  await productPage.getQuantityProduct("Beats Solo3 Wireless On-Ear");
 
   //5. Go to the cart
-  await cartPage.clickClearCartButton();
-
-  page.once("dialog", async (dialog) => {
-    await dialog.accept(); // Simulate clicking "OK"
-  });
+  await shopPage.goToCart();
 
   //6. Verify quantity of added product
 

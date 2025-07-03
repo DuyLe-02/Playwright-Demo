@@ -7,7 +7,7 @@ import { CartPage } from "src/pages/CartPage";
 import { CheckoutPage } from "src/pages/CheckoutPage";
 import { ShopPage } from "src/pages/ShopPage";
 import { OrderPage } from "src/pages/OrderPage";
-import { username, password } from "src/utils/env";
+import { url, username, password } from "src/utils/env";
 
 //Test case 2
 test("Verify users can buy multiple item successfully", async ({ page }) => {
@@ -20,7 +20,7 @@ test("Verify users can buy multiple item successfully", async ({ page }) => {
   const orderPage = new OrderPage(page);
 
   //1. Open browser and go to https://demo.testarchitect.com/
-  await welcomePage.navigate();
+  await welcomePage.navigate(url);
   await welcomePage.clickLoginTab();
 
   //2. Login with valid credentials
@@ -53,8 +53,8 @@ test("Verify users can buy multiple item successfully", async ({ page }) => {
     email: "jefeje1650@decodewp.com",
   };
   await checkoutPage.fillInfo(checkoutInfo);
-
   await checkoutPage.clickOrderButton();
+
   //7. Verify order confirmation message
   orderPage.orderConfirmation;
 });

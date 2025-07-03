@@ -6,8 +6,7 @@ import { ElectronicComponentPage } from "src/pages/ElectronicComponentPage";
 import { CartPage } from "src/pages/CartPage";
 import { CheckoutPage } from "src/pages/CheckoutPage";
 import { ShopPage } from "src/pages/ShopPage";
-
-import { username, password } from "src/utils/env";
+import { url, username, password } from "src/utils/env";
 
 //Test case 8
 test("Verify users can clear the cart", async ({ page }) => {
@@ -19,7 +18,7 @@ test("Verify users can clear the cart", async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   //1. Open browser and go to https://demo.testarchitect.com/
-  await welcomePage.navigate();
+  await welcomePage.navigate(url);
 
   //2. Login with valid credentials
   await welcomePage.clickLoginTab();
@@ -40,6 +39,5 @@ test("Verify users can clear the cart", async ({ page }) => {
   });
 
   //6. Verify empty cart page displays
-
   await cartPage.checkEmptyItemTable();
 });

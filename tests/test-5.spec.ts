@@ -8,7 +8,7 @@ import { CheckoutPage } from "src/pages/CheckoutPage";
 import { ShopPage } from "src/pages/ShopPage";
 import { OrderPage } from "src/pages/OrderPage";
 import { BasePage } from "src/pages/BasePage";
-import { username, password } from "src/utils/env";
+import { url, username, password } from "src/utils/env";
 
 test("Verify orders appear in order history", async ({ page }) => {
   const welcomePage = new WelcomePage(page);
@@ -21,7 +21,7 @@ test("Verify orders appear in order history", async ({ page }) => {
   const basePage = new BasePage(page);
 
   //1. Go to My Account page
-  await welcomePage.navigate();
+  await welcomePage.navigate(url);
   await welcomePage.clickLoginTab();
   await loginPage.login(username, password);
 
