@@ -16,7 +16,6 @@ export class CheckoutPage {
   readonly zipCodeTextBox = this.page.locator("input[id='billing_postcode']");
   readonly phoneTextBox = this.page.locator("input[id='billing_phone']");
   readonly emailAddressTextBox = this.page.locator("input[id='billing_email']");
-
   readonly placeOrderButton = this.page.getByRole("button", {
     name: "Place Order",
   });
@@ -45,27 +44,26 @@ export class CheckoutPage {
     await this.placeOrderButton.click();
   }
 
-  async checkBorder(textBoxName: string) {
-    const locator = this.page.locator(`input[id='billing_${textBoxName}']`);
-
-    await expect
-      .poll(
-        async () => {
-          return await locator.evaluate(
-            (el) => getComputedStyle(el).borderColor
-          );
-        },
-        {
-          timeout: 3000, // optional: wait up to 3s
-        }
-      )
-      .toBe("rgb(198, 40, 40)"); // #c62828
+  async checkBorder(...textBoxNames: string[]): Promise<void> {
+    for (const name of textBoxNames) {
+      const locator = this.page.locator(`input[id='billing_${name}']`);
+      await expect
+        .poll(
+          async () => {
+            return await locator.evaluate(
+              (el) => getComputedStyle(el).borderColor
+            );
+          },
+          { timeout: 3000 }
+        )
+        .toBe("rgb(198, 40, 40)");
+    }
   }
 
-  async checkErrorMessage(fieldName: string) {
-    const errorMessage = this.page.locator(
-      `li[data-id='billing_${fieldName}']`
-    );
-    await expect(errorMessage).toBeVisible();
+  async checkErrorMessage(...fieldNames: string[]): Promise<void> {
+    for (const name of fieldNames) {
+      const errorMessage = this.page.locator(`li[data-id='billing_${name}']`);
+      await expect(errorMessage).toBeVisible();
+    }
   }
 }

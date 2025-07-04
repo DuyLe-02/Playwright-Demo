@@ -5,8 +5,6 @@ import { MyAccountPage } from "src/pages/MyAccountPage";
 import { ElectronicComponentPage } from "src/pages/ElectronicComponentPage";
 import { CartPage } from "src/pages/CartPage";
 import { CheckoutPage } from "src/pages/CheckoutPage";
-import { ShopPage } from "src/pages/ShopPage";
-import { OrderPage } from "src/pages/OrderPage";
 import { url, username, password } from "src/utils/env";
 
 //Test case 1
@@ -18,7 +16,7 @@ test("Verify users can buy an item successfully", async ({ page }) => {
   const cartPage = new CartPage(page);
   const checkoutPage = new CheckoutPage(page);
 
-  //1. Open browser and go to https://demo.testarchitect.com/
+  //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
 
   //2. Login with valid credentials
@@ -38,6 +36,7 @@ test("Verify users can buy an item successfully", async ({ page }) => {
 
   // 8. Select any item randomly to purchase
   await electronicComponentPage.addToCart("DJI Mavic Pro Camera Drone");
+
   // 9. Click 'Add to Cart'
   await electronicComponentPage.goToCart();
 

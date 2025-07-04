@@ -1,15 +1,12 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { BasePage } from "./BasePage";
 
-export class ElectronicComponentPage extends BasePage {
+export class ElectronicComponentPage {
   readonly productGrid = this.page.locator(".products.products-grid");
   readonly productList = this.page.locator(".products.products-list");
   readonly addButton = this.page.getByRole("button", { name: "Add to cart" });
   readonly cart = this.page.getByRole("link").filter({ hasText: "$" });
 
-  constructor(protected page: Page) {
-    super(page);
-  }
+  constructor(private page: Page) {}
 
   async addToCart(productName: string): Promise<void> {
     const product = this.page.getByRole("link", {

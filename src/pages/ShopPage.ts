@@ -1,15 +1,18 @@
 import { expect, Locator, Page } from "@playwright/test";
-import { BasePage } from "./BasePage";
 
-export class ShopPage extends BasePage {
+export class ShopPage {
   readonly addButton = this.page.getByRole("button", { name: "Add to Cart" });
   readonly cart = this.page.getByRole("link").filter({ hasText: "$" });
   readonly sortComboBox = this.page.getByRole("combobox", {
     name: "Shop order",
   });
+  readonly typeList = this.page.locator(".switch-list");
 
-  constructor(protected page: Page) {
-    super(page);
+  constructor(private page: Page) {}
+
+  async changeDisplayed() {
+    await this.typeList.click();
+    await this.page.waitForTimeout(1000);
   }
 
   async addToCart(productName: string): Promise<void> {
@@ -31,6 +34,7 @@ export class ShopPage extends BasePage {
 
   async goToCart() {
     await this.cart.click();
+    await this.page.reload();
   }
 
   async chooseSortType(sortType: string) {
@@ -76,10 +80,6 @@ export class ShopPage extends BasePage {
     const sortedPrices = [...prices].sort((a, b) =>
       order === "asc" ? a - b : b - a
     );
-
-    console.log("Actual prices:", prices);
-    console.log("Expected sorted:", sortedPrices);
-
     expect(prices).toEqual(sortedPrices);
   }
 }

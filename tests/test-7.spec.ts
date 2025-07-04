@@ -1,14 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 import { WelcomePage } from "src/pages/WelcomePage";
 import { LoginPage } from "src/pages/LoginPage";
 import { MyAccountPage } from "src/pages/MyAccountPage";
-import { ElectronicComponentPage } from "src/pages/ElectronicComponentPage";
 import { CartPage } from "src/pages/CartPage";
 import { CheckoutPage } from "src/pages/CheckoutPage";
 import { ShopPage } from "src/pages/ShopPage";
-import { OrderPage } from "src/pages/OrderPage";
-import { BasePage } from "src/pages/BasePage";
-import { username, password } from "src/utils/env";
+import { url, username, password } from "src/utils/env";
 
 //Test case 7
 test("Ensure proper error handling when mandatory fields are blank", async ({
@@ -22,7 +19,7 @@ test("Ensure proper error handling when mandatory fields are blank", async ({
   const loginPage = new LoginPage(page);
 
   //1. Leave mandatory fields (address, payment info) blank
-  await welcomePage.navigate();
+  await welcomePage.navigate(url);
   await welcomePage.clickLoginTab();
   await loginPage.login(username, password);
   await accountPage.clickShopTab();
@@ -47,6 +44,6 @@ test("Ensure proper error handling when mandatory fields are blank", async ({
   await checkoutPage.clickOrderButton();
 
   // 3. Verify error messages
-  await checkoutPage.checkBorder("postcode");
-  await checkoutPage.checkErrorMessage("postcode");
+  await checkoutPage.checkBorder("first_name", "last_name", "postcode");
+  await checkoutPage.checkErrorMessage("first_name", "last_name", "postcode");
 });

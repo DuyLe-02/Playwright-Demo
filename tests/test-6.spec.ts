@@ -1,13 +1,10 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
 import { WelcomePage } from "src/pages/WelcomePage";
-import { LoginPage } from "src/pages/LoginPage";
 import { MyAccountPage } from "src/pages/MyAccountPage";
-import { ElectronicComponentPage } from "src/pages/ElectronicComponentPage";
 import { CartPage } from "src/pages/CartPage";
 import { CheckoutPage } from "src/pages/CheckoutPage";
 import { ShopPage } from "src/pages/ShopPage";
-import { OrderPage } from "src/pages/OrderPage";
-import { BasePage } from "src/pages/BasePage";
+import { url } from "src/utils/env";
 
 //Test case 6
 test("Verify users try to buy an item without logging in (As a guest)", async ({
@@ -19,8 +16,8 @@ test("Verify users try to buy an item without logging in (As a guest)", async ({
   const checkoutPage = new CheckoutPage(page);
   const shopPage = new ShopPage(page);
 
-  //1. Open https://demo.testarchitect.com/
-  await welcomePage.navigate();
+  //1. Open browser and go to BASE_URL
+  await welcomePage.navigate(url);
 
   //2. Navigate to 'Shop' or 'Products' section
   await accountPage.clickShopTab();

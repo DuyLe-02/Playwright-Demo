@@ -6,7 +6,7 @@ export class OrderPage {
   );
   constructor(private page: Page) {}
 
-  async login() {
+  async checkConfirmMessage() {
     await expect(this.orderConfirmation).toBeVisible();
   }
 }

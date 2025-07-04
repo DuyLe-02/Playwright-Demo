@@ -2,7 +2,6 @@ import { test, expect } from "@playwright/test";
 import { WelcomePage } from "src/pages/WelcomePage";
 import { LoginPage } from "src/pages/LoginPage";
 import { MyAccountPage } from "src/pages/MyAccountPage";
-import { ElectronicComponentPage } from "src/pages/ElectronicComponentPage";
 import { CartPage } from "src/pages/CartPage";
 import { CheckoutPage } from "src/pages/CheckoutPage";
 import { ShopPage } from "src/pages/ShopPage";
@@ -29,13 +28,13 @@ test("Verify users can clear the cart", async ({ page }) => {
   await shopPage.goToCart();
 
   //4. Verify items show in table
-  await cartPage.checkItemTable();
+  await cartPage.checkItemTableDisplayed();
 
   //5. Click on Clear shopping cart
   await cartPage.clickClearCartButton();
 
   page.once("dialog", async (dialog) => {
-    await dialog.accept(); // Simulate clicking "OK"
+    await dialog.accept();
   });
 
   //6. Verify empty cart page displays
