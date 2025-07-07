@@ -15,6 +15,15 @@ export class ShopPage {
     await this.page.waitForTimeout(1000);
   }
 
+  async viewProduct(productName: string): Promise<void> {
+    const product = this.page.getByRole("link", {
+      name: productName,
+      exact: true,
+    });
+    await expect(product).toBeVisible({ timeout: 5000 });
+    await product.click();
+  }
+
   async addToCart(productName: string): Promise<void> {
     const product = this.page.getByRole("link", {
       name: productName,
