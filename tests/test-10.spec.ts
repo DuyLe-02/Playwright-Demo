@@ -38,5 +38,6 @@ test("Verify users can post a review", async ({ page }) => {
   await productPage.submitReview(2, "Good3");
 
   //7. Verify new review
+
   await productPage.verifyReview(2, "Good3");
 });
