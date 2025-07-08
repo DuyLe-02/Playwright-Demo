@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 export class CartPage {
   readonly checkoutButton = this.page.getByRole("link", {
@@ -21,6 +21,9 @@ export class CartPage {
 
   async clickClearCartButton() {
     await this.clearCartButton.click();
+    this.page.once("dialog", async (dialog) => {
+      await dialog.accept();
+    });
   }
 
   async checkEmptyItemTable() {

@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 export class ShopPage {
   readonly addButton = this.page.getByRole("button", { name: "Add to Cart" });

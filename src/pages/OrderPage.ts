@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 export class OrderPage {
   readonly orderConfirmation = this.page.getByText(
@@ -11,7 +11,7 @@ export class OrderPage {
   }
 
   async getOrderInfo(): Promise<OrderInfo> {
-    const order =
+    const orderNumber =
       (
         await this.page.textContent(".woocommerce-order-overview__order strong")
       )?.trim() || "";
@@ -25,7 +25,7 @@ export class OrderPage {
       )) || "";
 
     return {
-      order: `#${order}`,
+      orderNumber: `#${orderNumber}`,
       date,
       total,
     };

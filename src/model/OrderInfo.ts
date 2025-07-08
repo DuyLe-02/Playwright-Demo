@@ -1,5 +1,5 @@
 type OrderInfo = {
-  order: string;
+  orderNumber: string;
   date: string;
   total: string;
 };

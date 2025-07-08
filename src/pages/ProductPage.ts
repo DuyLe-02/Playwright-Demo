@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 
 export class ProductPage {
   constructor(private page: Page) {}
@@ -15,7 +15,7 @@ export class ProductPage {
   }
 
   async getQuantityProduct(productName: string): Promise<void> {
-    const quantity = await this.page
+    await this.page
       .getByRole("spinbutton", { name: `${productName} quantity` })
       .getAttribute("value");
   }

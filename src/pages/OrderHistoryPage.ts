@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 
 export class OrderHistoryPage {
   constructor(private page: Page) {}
@@ -7,7 +7,7 @@ export class OrderHistoryPage {
     const data = await this.page.$eval(
       "table.woocommerce-orders-table tbody tr",
       (row) => {
-        const order =
+        const orderNumber =
           row
             .querySelector(".woocommerce-orders-table__cell-order-number a")
             ?.textContent?.trim() || "";
@@ -20,13 +20,12 @@ export class OrderHistoryPage {
             ".woocommerce-orders-table__cell-order-total .amount"
           )?.textContent || "";
 
-        return { order, date, totalText };
+        return { orderNumber, date, totalText };
       }
     );
 
-    // If no calculation needed, just return as-is, or slightly normalize:
     return {
-      order: data.order,
+      orderNumber: data.orderNumber,
       date: data.date,
       total: data.totalText,
     };

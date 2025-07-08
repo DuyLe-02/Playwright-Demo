@@ -62,4 +62,6 @@ test("Verify users can buy an item successfully", async ({ page }) => {
 
   // 16. Click on PLACE ORDER
   await checkoutPage.clickOrderButton();
+
+  //
 });

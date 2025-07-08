@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { WelcomePage } from "src/pages/WelcomePage";
 import { LoginPage } from "src/pages/LoginPage";
 import { MyAccountPage } from "src/pages/MyAccountPage";
@@ -55,5 +55,6 @@ test("Verify users can buy multiple item successfully", async ({ page }) => {
   await checkoutPage.clickOrderButton();
 
   //7. Verify order confirmation message
-  await orderPage.checkConfirmMessage();
+  orderPage.orderConfirmation;
+  await expect(orderPage.orderConfirmation).toBeVisible();
 });
