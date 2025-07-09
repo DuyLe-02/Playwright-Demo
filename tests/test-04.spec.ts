@@ -1,17 +1,14 @@
-import { test } from "@playwright/test";
-import { WelcomePage } from "src/pages/WelcomePage";
-import { LoginPage } from "src/pages/LoginPage";
-import { MyAccountPage } from "src/pages/MyAccountPage";
-import { ShopPage } from "src/pages/ShopPage";
+import { test } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
 //Test case 4
-test("Verify users can sort items by price", async ({ page }) => {
-  const welcomePage = new WelcomePage(page);
-  const loginPage = new LoginPage(page);
-  const accountPage = new MyAccountPage(page);
-  const shopPage = new ShopPage(page);
-
+test("Verify users can sort items by price", async ({
+  page,
+  welcomePage,
+  loginPage,
+  myAccountPage,
+  shopPage,
+}) => {
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
   await welcomePage.clickLoginTab();
@@ -20,7 +17,7 @@ test("Verify users can sort items by price", async ({ page }) => {
   await loginPage.login(username, password);
 
   //3. Go to Shop page
-  await accountPage.clickShopTab();
+  await myAccountPage.clickShopTab();
 
   //4.  Switch view to list
   await shopPage.changeDisplayed();

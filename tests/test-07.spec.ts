@@ -1,28 +1,21 @@
-import { test } from "@playwright/test";
-import { WelcomePage } from "src/pages/WelcomePage";
-import { LoginPage } from "src/pages/LoginPage";
-import { MyAccountPage } from "src/pages/MyAccountPage";
-import { CartPage } from "src/pages/CartPage";
-import { CheckoutPage } from "src/pages/CheckoutPage";
-import { ShopPage } from "src/pages/ShopPage";
+import { test } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
 //Test case 7
 test("Ensure proper error handling when mandatory fields are blank", async ({
   page,
+  welcomePage,
+  myAccountPage,
+  cartPage,
+  checkoutPage,
+  shopPage,
+  loginPage,
 }) => {
-  const welcomePage = new WelcomePage(page);
-  const accountPage = new MyAccountPage(page);
-  const cartPage = new CartPage(page);
-  const checkoutPage = new CheckoutPage(page);
-  const shopPage = new ShopPage(page);
-  const loginPage = new LoginPage(page);
-
   //1. Leave mandatory fields (address, payment info) blank
   await welcomePage.navigate(url);
   await welcomePage.clickLoginTab();
   await loginPage.login(username, password);
-  await accountPage.clickShopTab();
+  await myAccountPage.clickShopTab();
   await shopPage.addMultipleToCart(["Bose SoundLink Mini"]);
   await shopPage.goToCart();
   await cartPage.clickCheckoutButton();

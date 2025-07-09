@@ -9,7 +9,6 @@ import { OrderPage } from "src/pages/OrderPage";
 import { ProductPage } from "src/pages/ProductPage";
 import { ShopPage } from "src/pages/ShopPage";
 import { WelcomePage } from "src/pages/WelcomePage";
-import { url, username, password } from "src/utils/env";
 
 export const test = base.extend<{
   cartPage: CartPage;
@@ -24,16 +23,11 @@ export const test = base.extend<{
   welcomePage: WelcomePage;
 }>({
   welcomePage: async ({ page }, use) => {
-    const welcomePage = new WelcomePage(page);
-    await welcomePage.navigate(url);
-    await welcomePage.clickLoginTab();
-    await use(welcomePage);
+    await use(new WelcomePage(page));
   },
 
   loginPage: async ({ page }, use) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.login(username, password);
-    await use(loginPage);
+    await use(new LoginPage(page));
   },
 
   cartPage: async ({ page }, use) => {

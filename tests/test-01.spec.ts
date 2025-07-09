@@ -1,21 +1,16 @@
-import { test, expect } from "@playwright/test";
-import { WelcomePage } from "src/pages/WelcomePage";
-import { LoginPage } from "src/pages/LoginPage";
-import { MyAccountPage } from "src/pages/MyAccountPage";
-import { ElectronicComponentPage } from "src/pages/ElectronicComponentPage";
-import { CartPage } from "src/pages/CartPage";
-import { CheckoutPage } from "src/pages/CheckoutPage";
+import { test, expect } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
 //Test case 1
-test("Verify users can buy an item successfully", async ({ page }) => {
-  const welcomePage = new WelcomePage(page);
-  const loginPage = new LoginPage(page);
-  const accountPage = new MyAccountPage(page);
-  const electronicComponentPage = new ElectronicComponentPage(page);
-  const cartPage = new CartPage(page);
-  const checkoutPage = new CheckoutPage(page);
-
+test("Verify users can buy an item successfully", async ({
+  page,
+  welcomePage,
+  loginPage,
+  myAccountPage,
+  electronicComponentPage,
+  cartPage,
+  checkoutPage,
+}) => {
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
 
@@ -25,7 +20,7 @@ test("Verify users can buy an item successfully", async ({ page }) => {
 
   // 3. Navigate to All departments section
   // 4. Select Electronic Components & Supplies
-  await accountPage.selectElectronicComponent();
+  await myAccountPage.selectElectronicComponent();
 
   // 5. Verify the items should be displayed as a grid
   // 6. Switch view to list
@@ -44,7 +39,7 @@ test("Verify users can buy an item successfully", async ({ page }) => {
   await cartPage.clickCheckoutButton();
 
   // 13. Verify Checkout page displays
-  await expect(page).toHaveURL("**/checkout/");
+  await expect(page).toHaveURL(/\/checkout\/$/);
 
   // 15. Fill the billing details with default payment method
   const checkoutInfo: CheckoutInfo = {
@@ -62,6 +57,4 @@ test("Verify users can buy an item successfully", async ({ page }) => {
 
   // 16. Click on PLACE ORDER
   await checkoutPage.clickOrderButton();
-
-  //
 });

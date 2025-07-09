@@ -1,23 +1,16 @@
-import { test, expect } from "@playwright/test";
-import { WelcomePage } from "src/pages/WelcomePage";
-import { LoginPage } from "src/pages/LoginPage";
-import { MyAccountPage } from "src/pages/MyAccountPage";
-import { ElectronicComponentPage } from "src/pages/ElectronicComponentPage";
-import { CartPage } from "src/pages/CartPage";
-import { ShopPage } from "src/pages/ShopPage";
+import { test, expect } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
 //Test case 9
 test("Verify users can update quantity of product in cart", async ({
   page,
+  welcomePage,
+  myAccountPage,
+  shopPage,
+  loginPage,
+  electronicComponentPage,
+  cartPage,
 }) => {
-  const welcomePage = new WelcomePage(page);
-  const accountPage = new MyAccountPage(page);
-  const cartPage = new CartPage(page);
-  const shopPage = new ShopPage(page);
-  const loginPage = new LoginPage(page);
-  const electronicComponentPage = new ElectronicComponentPage(page);
-
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
 
@@ -26,7 +19,7 @@ test("Verify users can update quantity of product in cart", async ({
   await loginPage.login(username, password);
 
   //3. Go to Shop page
-  await accountPage.clickShopTab();
+  await myAccountPage.clickShopTab();
 
   //4. Add a product
   await electronicComponentPage.addToCart("Beats Solo3 Wireless On-Ear");

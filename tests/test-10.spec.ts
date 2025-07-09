@@ -1,19 +1,15 @@
-import { test } from "@playwright/test";
-import { WelcomePage } from "src/pages/WelcomePage";
-import { LoginPage } from "src/pages/LoginPage";
-import { MyAccountPage } from "src/pages/MyAccountPage";
-import { ShopPage } from "src/pages/ShopPage";
-import { ProductPage } from "src/pages/ProductPage";
+import { test } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
 //Test case 10
-test("Verify users can post a review", async ({ page }) => {
-  const welcomePage = new WelcomePage(page);
-  const accountPage = new MyAccountPage(page);
-  const shopPage = new ShopPage(page);
-  const loginPage = new LoginPage(page);
-  const productPage = new ProductPage(page);
-
+test("Verify users can post a review", async ({
+  page,
+  welcomePage,
+  myAccountPage,
+  shopPage,
+  loginPage,
+  productPage,
+}) => {
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
 
@@ -22,7 +18,7 @@ test("Verify users can post a review", async ({ page }) => {
   await loginPage.login(username, password);
 
   //3. Go to Shop page
-  await accountPage.clickShopTab();
+  await myAccountPage.clickShopTab();
 
   //4. Click on a product to view detail
   await shopPage.viewProduct("Beats Solo3 Wireless On-Ear");

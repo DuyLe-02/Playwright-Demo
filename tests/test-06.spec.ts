@@ -1,26 +1,20 @@
-import { test } from "@playwright/test";
-import { WelcomePage } from "src/pages/WelcomePage";
-import { MyAccountPage } from "src/pages/MyAccountPage";
-import { CartPage } from "src/pages/CartPage";
-import { CheckoutPage } from "src/pages/CheckoutPage";
-import { ShopPage } from "src/pages/ShopPage";
+import { test } from "src/fixtures/fixtures";
 import { url } from "src/utils/env";
 
 //Test case 6
 test("Verify users try to buy an item without logging in (As a guest)", async ({
   page,
+  welcomePage,
+  myAccountPage,
+  cartPage,
+  checkoutPage,
+  shopPage,
 }) => {
-  const welcomePage = new WelcomePage(page);
-  const accountPage = new MyAccountPage(page);
-  const cartPage = new CartPage(page);
-  const checkoutPage = new CheckoutPage(page);
-  const shopPage = new ShopPage(page);
-
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
 
   //2. Navigate to 'Shop' or 'Products' section
-  await accountPage.clickShopTab();
+  await myAccountPage.clickShopTab();
 
   //3. Add a product to cart
   await shopPage.addMultipleToCart(["Bose SoundLink Mini"]);

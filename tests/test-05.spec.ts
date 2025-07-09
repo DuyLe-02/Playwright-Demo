@@ -1,18 +1,14 @@
-import { test, expect } from "@playwright/test";
-import { WelcomePage } from "src/pages/WelcomePage";
-import { LoginPage } from "src/pages/LoginPage";
-import { MyAccountPage } from "src/pages/MyAccountPage";
-import { OrderPage } from "src/pages/OrderPage";
-import { OrderHistoryPage } from "src/pages/OrderHistoryPage";
+import { test, expect } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
-test("Verify orders appear in order history", async ({ page }) => {
-  const welcomePage = new WelcomePage(page);
-  const loginPage = new LoginPage(page);
-  const accountPage = new MyAccountPage(page);
-  const orderPage = new OrderPage(page);
-  const orderHistoryPage = new OrderHistoryPage(page);
-
+test("Verify orders appear in order history", async ({
+  page,
+  welcomePage,
+  loginPage,
+  myAccountPage,
+  orderPage,
+  orderHistoryPage,
+}) => {
   //Pre-condition
   //Book Order
   const detail = await orderPage.getOrderInfo();
@@ -23,7 +19,7 @@ test("Verify orders appear in order history", async ({ page }) => {
   await loginPage.login(username, password);
 
   //2. Click on Orders in left navigation
-  await accountPage.clickOrderTab();
+  await myAccountPage.clickOrderTab();
 
   //3. Verify order details
   const orders = await orderHistoryPage.getOrdersHistoryInfo();

@@ -1,23 +1,17 @@
-import { test, expect } from "@playwright/test";
-import { WelcomePage } from "src/pages/WelcomePage";
-import { LoginPage } from "src/pages/LoginPage";
-import { MyAccountPage } from "src/pages/MyAccountPage";
-import { CartPage } from "src/pages/CartPage";
-import { CheckoutPage } from "src/pages/CheckoutPage";
-import { ShopPage } from "src/pages/ShopPage";
-import { OrderPage } from "src/pages/OrderPage";
+import { test, expect } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
 //Test case 2
-test("Verify users can buy multiple item successfully", async ({ page }) => {
-  const welcomePage = new WelcomePage(page);
-  const loginPage = new LoginPage(page);
-  const accountPage = new MyAccountPage(page);
-  const cartPage = new CartPage(page);
-  const checkoutPage = new CheckoutPage(page);
-  const shopPage = new ShopPage(page);
-  const orderPage = new OrderPage(page);
-
+test("Verify users can buy multiple item successfully", async ({
+  page,
+  welcomePage,
+  loginPage,
+  myAccountPage,
+  cartPage,
+  checkoutPage,
+  shopPage,
+  orderPage,
+}) => {
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
   await welcomePage.clickLoginTab();
@@ -26,7 +20,7 @@ test("Verify users can buy multiple item successfully", async ({ page }) => {
   await loginPage.login(username, password);
 
   //3. Go to Shop page
-  await accountPage.clickShopTab();
+  await myAccountPage.clickShopTab();
 
   //4. Select multiple items and add to cart
   await shopPage.addMultipleToCart([
@@ -55,6 +49,5 @@ test("Verify users can buy multiple item successfully", async ({ page }) => {
   await checkoutPage.clickOrderButton();
 
   //7. Verify order confirmation message
-  orderPage.orderConfirmation;
   await expect(orderPage.orderConfirmation).toBeVisible();
 });
