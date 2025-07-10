@@ -3,7 +3,6 @@ import { url, username, password } from "src/utils/env";
 
 //Test case 2
 test("Verify users can buy multiple item successfully", async ({
-  page,
   welcomePage,
   loginPage,
   myAccountPage,

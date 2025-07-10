@@ -3,7 +3,6 @@ import { url, username, password } from "src/utils/env";
 
 //Test case 9
 test("Verify users can update quantity of product in cart", async ({
-  page,
   welcomePage,
   myAccountPage,
   shopPage,

@@ -3,7 +3,6 @@ import { url, username, password } from "src/utils/env";
 
 //Test case 10
 test("Verify users can post a review", async ({
-  page,
   welcomePage,
   myAccountPage,
   shopPage,

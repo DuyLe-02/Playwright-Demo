@@ -3,7 +3,6 @@ import { url } from "src/utils/env";
 
 //Test case 6
 test("Verify users try to buy an item without logging in (As a guest)", async ({
-  page,
   welcomePage,
   myAccountPage,
   cartPage,

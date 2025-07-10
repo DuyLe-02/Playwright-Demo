@@ -2,7 +2,6 @@ import { test, expect } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
 test("Verify orders appear in order history", async ({
-  page,
   welcomePage,
   loginPage,
   myAccountPage,

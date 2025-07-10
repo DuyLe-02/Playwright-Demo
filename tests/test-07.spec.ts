@@ -3,7 +3,6 @@ import { url, username, password } from "src/utils/env";
 
 //Test case 7
 test("Ensure proper error handling when mandatory fields are blank", async ({
-  page,
   welcomePage,
   myAccountPage,
   cartPage,

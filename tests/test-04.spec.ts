@@ -3,7 +3,6 @@ import { url, username, password } from "src/utils/env";
 
 //Test case 4
 test("Verify users can sort items by price", async ({
-  page,
   welcomePage,
   loginPage,
   myAccountPage,
