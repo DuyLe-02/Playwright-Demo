@@ -53,9 +53,5 @@ export class ProductPage {
         `Expected rating '${expectedRating}' not found in review with text '${expectedText}'. Got: '${ariaLabel}'`
       );
     }
-
-    console.log(
-      `✅ Verified review: "${expectedText}" with ${expectedRating} star rating.`
-    );
   }
 }

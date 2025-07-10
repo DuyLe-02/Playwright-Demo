@@ -1,8 +1,10 @@
 import { Page } from "@playwright/test";
 
 export class LoginPage {
-  readonly username = this.page.locator("input[id='username']");
-  readonly password = this.page.locator("input[id='password']");
+  readonly username = this.page.getByRole("textbox", {
+    name: "Username or email address *",
+  });
+  readonly password = this.page.getByRole("textbox", { name: "Password *" });
   readonly loginButton = this.page.getByRole("button", { name: "LOG IN" });
 
   constructor(private page: Page) {}

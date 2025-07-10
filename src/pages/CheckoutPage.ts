@@ -1,21 +1,27 @@
 import { expect, Page } from "@playwright/test";
 
 export class CheckoutPage {
-  readonly firstNameTextBox = this.page.locator(
-    "input[id='billing_first_name']"
-  );
-  readonly lastNameTextBox = this.page.locator("input[id='billing_last_name']");
-  readonly country_regionDropdown = this.page.locator(
-    "select[id='billing_country']"
-  );
-  readonly streetAddressTextbox = this.page.locator(
-    "input[id='billing_address_1']"
-  );
-  readonly town_cityTextBox = this.page.locator("input[id='billing_city']");
-  readonly stateDropdown = this.page.locator("select[id='billing_state']");
-  readonly zipCodeTextBox = this.page.locator("input[id='billing_postcode']");
-  readonly phoneTextBox = this.page.locator("input[id='billing_phone']");
-  readonly emailAddressTextBox = this.page.locator("input[id='billing_email']");
+  readonly firstNameTextBox = this.page.getByRole("textbox", {
+    name: "First name *",
+  });
+  readonly lastNameTextBox = this.page.getByRole("textbox", {
+    name: "Last name *",
+  });
+  readonly country_regionDropdown = this.page.locator("#billing_country");
+  readonly streetAddressTextbox = this.page.getByRole("textbox", {
+    name: "Street address *",
+  });
+  readonly town_cityTextBox = this.page.getByRole("textbox", {
+    name: "Town / City *",
+  });
+  readonly stateDropdown = this.page.locator("#billing_state");
+  readonly zipCodeTextBox = this.page.getByRole("textbox", {
+    name: "ZIP Code *",
+  });
+  readonly phoneTextBox = this.page.getByRole("textbox", { name: "Phone *" });
+  readonly emailAddressTextBox = this.page.getByRole("textbox", {
+    name: "Email address *",
+  });
   readonly placeOrderButton = this.page.getByRole("button", {
     name: "Place Order",
   });
@@ -46,7 +52,7 @@ export class CheckoutPage {
 
   async checkBorder(...textBoxNames: string[]): Promise<void> {
     for (const name of textBoxNames) {
-      const locator = this.page.locator(`input[id='billing_${name}']`);
+      const locator = this.page.getByRole("textbox", { name });
       await expect
         .poll(
           async () => {

@@ -8,10 +8,8 @@ export class MyAccountPage {
     .locator(".secondary-menu-wrapper")
     .getByRole("link", { name: "Electronic Components & Supplies" });
 
-  readonly shopTab = this.page.locator("li[id='menu-item-5578']").nth(0);
-  readonly orderTab = this.page.locator(
-    "li.woocommerce-MyAccount-navigation-link--orders a"
-  );
+  readonly shopTab = this.page.getByRole("link", { name: "Shop" }).nth(0);
+  readonly orderTab = this.page.getByRole("link", { name: " Orders" });
 
   constructor(private page: Page) {}
 

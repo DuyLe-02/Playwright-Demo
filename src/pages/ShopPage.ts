@@ -1,4 +1,5 @@
 import { expect, Page } from "@playwright/test";
+import { url } from "src/utils/env";
 
 export class ShopPage {
   readonly addButton = this.page.getByRole("button", { name: "Add to Cart" });
@@ -37,7 +38,7 @@ export class ShopPage {
   async addMultipleToCart(productNames: string[]): Promise<void> {
     for (const name of productNames) {
       await this.addToCart(name);
-      await this.page.goto("https://demo.testarchitect.com/shop/");
+      await this.page.goto(`${url}/shop`);
     }
   }
 
