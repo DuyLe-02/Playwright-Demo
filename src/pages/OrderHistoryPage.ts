@@ -3,11 +3,12 @@ import { Page } from "@playwright/test";
 export class OrderHistoryPage {
   constructor(private page: Page) {}
 
+  readonly orderHistoryTable = this.page.getByRole("table");
+  readonly orderHistoryList = this.orderHistoryTable.getByRole("row");
+
   async getOrdersHistoryInfo(): Promise<OrderInfo> {
-    const row = this.page
-      .locator("table.woocommerce-orders-table tbody tr")
-      .first();
-    const cells = row.locator("td");
+    const row = this.orderHistoryList.nth(1);
+    const cells = row.getByRole("cell");
     const count = await cells.count();
 
     let orderNumber = "";
