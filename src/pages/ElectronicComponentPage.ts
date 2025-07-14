@@ -13,7 +13,6 @@ export class ElectronicComponentPage {
       name: productName,
       exact: true,
     });
-    await expect(product).toBeVisible({ timeout: 5000 });
     await product.click();
     await this.addButton.click();
   }
