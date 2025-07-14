@@ -2,6 +2,7 @@ import { test, expect } from "src/fixtures/fixtures";
 import { url, username, password } from "src/utils/env";
 
 test("Verify orders appear in order history", async ({
+  page,
   welcomePage,
   loginPage,
   myAccountPage,
@@ -10,6 +11,9 @@ test("Verify orders appear in order history", async ({
 }) => {
   //Pre-condition
   //Book Order
+  await page.goto(
+    "https://demo.testarchitect.com/checkout/order-received/12256/?key=wc_order_RGIFpc7LynDqN"
+  );
   const detail = await orderPage.getOrderInfo();
 
   //1. Go to My Account page
