@@ -53,16 +53,7 @@ export class CheckoutPage {
   async checkBorder(...textBoxNames: string[]): Promise<void> {
     for (const name of textBoxNames) {
       const locator = this.page.getByRole("textbox", { name });
-      await expect
-        .poll(
-          async () => {
-            return await locator.evaluate(
-              (el) => getComputedStyle(el).borderColor
-            );
-          },
-          { timeout: 3000 }
-        )
-        .toBe("rgb(198, 40, 40)");
+      await expect(locator).toHaveCSS("border-color", "rgb(198, 40, 40)");
     }
   }
 
