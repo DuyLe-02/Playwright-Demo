@@ -20,15 +20,15 @@ test("Ensure proper error handling when mandatory fields are blank", async ({
   await cartPage.clickCheckoutButton();
 
   const checkoutInfo: CheckoutInfo = {
-    firstName: "John",
-    lastName: "Back",
+    firstName: "",
+    lastName: "",
     countryRegion: "United States (US)",
-    streetAddress: "123 GVN",
-    city: "San Jose",
-    state: "CA",
+    streetAddress: "",
+    city: "",
+    state: "",
     zipCode: "",
-    phone: "1234567890",
-    email: "jefeje1650@decodewp.com",
+    phone: "",
+    email: "",
   };
   await checkoutPage.fillInfo(checkoutInfo);
 
@@ -36,6 +36,22 @@ test("Ensure proper error handling when mandatory fields are blank", async ({
   await checkoutPage.clickOrderButton();
 
   // 3. Verify error messages
-  await checkoutPage.checkBorder("first_name", "last_name", "postcode");
-  await checkoutPage.checkErrorMessage("first_name", "last_name", "postcode");
+  await checkoutPage.checkBorder(
+    "First name",
+    "Last name",
+    "Street address",
+    "Town / City",
+    "ZIP Code",
+    "Phone",
+    "Email address"
+  );
+  await checkoutPage.checkErrorMessage(
+    "first_name",
+    "last_name",
+    "address_1",
+    "city",
+    "postcode",
+    "phone",
+    "email"
+  );
 });
