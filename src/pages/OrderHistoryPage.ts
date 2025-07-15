@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { DateUtils } from "src/utils/Word";
 
 export class OrderHistoryPage {
   constructor(private page: Page) {}
@@ -7,32 +8,30 @@ export class OrderHistoryPage {
   readonly orderHistoryList = this.orderHistoryTable.getByRole("row");
 
   async getOrdersHistoryInfo(): Promise<OrderInfo> {
-    const row = this.orderHistoryList.nth(1);
-    const cells = row.getByRole("cell");
-    const count = await cells.count();
+    const order: OrderInfo = {
+      order: "",
+      date: "",
+      total: "",
+    };
 
-    let orderNumber = "";
-    let date = "";
-    let total = "";
+    for (let i = 1; i <= 1; i++) {
+      const row = this.orderHistoryList.nth(i);
+      for (const key in order) {
+        const typedKey = key as keyof OrderInfo;
+        const cell = row
+          .locator(
+            `xpath=//td[contains(translate(@data-title, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'${key}')]//*`
+          )
+          .first();
+        let text = await cell.innerText();
 
-    for (let i = 0; i < count; i++) {
-      const cell = cells.nth(i);
-      const title = (await cell.getAttribute("data-title"))?.trim();
-
-      switch (title) {
-        case "Order":
-          orderNumber = (await cell.locator("a").first().innerText()).trim();
-          break;
-        case "Date":
-          date = (
-            (await cell.locator("time").first().textContent()) ?? ""
-          ).trim();
-          break;
-        case "Total":
-          total = (await cell.locator(".amount").first().innerText()).trim();
-          break;
+        // Format date field to Title Case
+        if (key === "date") {
+          text = DateUtils.toTitleCase(text);
+        }
+        order[typedKey] = text;
       }
     }
-    return { orderNumber, date, total };
+    return order;
   }
 }

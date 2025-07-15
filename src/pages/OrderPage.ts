@@ -4,6 +4,12 @@ export class OrderPage {
   readonly orderConfirmation = this.page.getByText(
     "Thank you. Your order has been received."
   );
+
+  readonly orderDetailsArea = this.page.locator(".order_details");
+  readonly orderNumberRaw = this.orderDetailsArea.locator(".order strong");
+  readonly orderDateRaw = this.orderDetailsArea.locator(".date strong");
+  readonly totalRaw = this.orderDetailsArea.locator(".total strong");
+
   constructor(private page: Page) {}
 
   async checkConfirmMessage() {
@@ -11,23 +17,14 @@ export class OrderPage {
   }
 
   async getOrderInfo(): Promise<OrderInfo> {
-    const orderNumber =
-      (
-        await this.page.innerText(".woocommerce-order-overview__order strong")
-      )?.trim() || "";
-    const date =
-      (
-        await this.page.innerText(".woocommerce-order-overview__date strong")
-      )?.trim() || "";
-    const total =
-      (await this.page.innerText(
-        ".woocommerce-order-overview__total strong"
-      )) || "";
+    const orderNumber = await this.orderNumberRaw.innerText();
+    const orderDate = await this.orderDateRaw.innerText();
+    const orderTotal = await this.totalRaw.innerText();
 
     return {
-      orderNumber: `#${orderNumber}`,
-      date,
-      total,
+      order: `#${orderNumber}`,
+      date: orderDate,
+      total: orderTotal,
     };
   }
 }
