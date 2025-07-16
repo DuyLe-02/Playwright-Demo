@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { DateUtils } from "src/utils/Word";
+import { StringUtils } from "src/utils/Word";
 
 export class OrderHistoryPage {
   constructor(private page: Page) {}
@@ -18,16 +18,12 @@ export class OrderHistoryPage {
       const row = this.orderHistoryList.nth(i);
       for (const key in order) {
         const typedKey = key as keyof OrderInfo;
-        const cell = row
-          .locator(
-            `xpath=//td[contains(translate(@data-title, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'),'${key}')]//*`
-          )
-          .first();
+        const cell = row.locator(`td[data-title="${key}" i] *`).first();
         let text = await cell.innerText();
 
         // Format date field to Title Case
         if (key === "date") {
-          text = DateUtils.toTitleCase(text);
+          text = StringUtils.toTitleCase(text);
         }
         order[typedKey] = text;
       }
