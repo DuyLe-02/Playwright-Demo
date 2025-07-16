@@ -4,9 +4,8 @@ export class CartPage {
   readonly checkoutButton = this.page.getByRole("link", {
     name: "Proceed to checkout",
   });
-
-  readonly itemTable = this.page.locator("div.table-responsive");
-  readonly clearCartButton = this.page.locator("a.clear-cart");
+  readonly itemTable = this.page.locator(".table-responsive");
+  readonly clearCartButton = this.page.locator(".clear-cart");
   readonly loadElement = this.page.locator(".blockUI .blockOverlay");
 
   constructor(private page: Page) {}

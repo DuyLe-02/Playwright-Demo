@@ -36,21 +36,18 @@ export class ProductPage {
   }
 
   async verifyReview(expectedRating: number, expectedText: string) {
-    // Find the specific review block based on its text content
     const reviewBlock = this.page.locator(".comment-text", {
       has: this.page.locator(`.description >> text=${expectedText}`),
     });
 
-    // Assert that the review block is visible
     await expect(reviewBlock).toBeVisible();
 
-    // Get the aria-label for the rating
     const ratingLocator = reviewBlock.locator(".star-rating");
-    const ariaLabel = await ratingLocator.getAttribute("aria-label");
+    const starRating = await ratingLocator.getAttribute("aria-label");
 
-    if (!ariaLabel?.includes(`Rated ${expectedRating} out of 5`)) {
+    if (!starRating?.includes(`Rated ${expectedRating} out of 5`)) {
       throw new Error(
-        `Expected rating '${expectedRating}' not found in review with text '${expectedText}'. Got: '${ariaLabel}'`
+        `Expected rating '${expectedRating}' not found in review with text '${expectedText}'. Got: '${starRating}'`
       );
     }
   }

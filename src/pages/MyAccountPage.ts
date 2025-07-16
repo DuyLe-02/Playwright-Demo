@@ -1,13 +1,10 @@
 import { Page } from "@playwright/test";
 
 export class MyAccountPage {
-  readonly allDepartmentSection = this.page.locator(
-    "//span[text() = 'All departments']"
-  );
-  readonly electronicComponent = this.page
-    .locator(".secondary-menu-wrapper")
-    .getByRole("link", { name: "Electronic Components & Supplies" });
-
+  readonly allDepartmentSection = this.page.locator(".secondary-menu-wrapper");
+  readonly electronicComponent = this.allDepartmentSection.getByRole("link", {
+    name: "Electronic Components & Supplies",
+  });
   readonly shopTab = this.page.getByRole("link", { name: "Shop" }).nth(0);
   readonly orderTab = this.page.getByRole("link", { name: " Orders" });
 
