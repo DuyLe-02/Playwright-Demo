@@ -1,4 +1,4 @@
-export class DateUtils {
+export class StringUtils {
   /**
    * Converts a string to title case, where the first letter of each word is capitalized
    * and all other letters are lowercase.
