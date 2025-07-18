@@ -10,6 +10,7 @@ test("Verify users can sort items by price", async ({
 }) => {
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
+  await welcomePage.handlePopupIfVisible();
   await welcomePage.clickLoginTab();
 
   //2. Login with valid credentials

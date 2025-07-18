@@ -13,6 +13,7 @@ test("Verify users can buy multiple item successfully", async ({
 }) => {
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
+  await welcomePage.handlePopupIfVisible();
   await welcomePage.clickLoginTab();
 
   //2. Login with valid credentials

@@ -12,6 +12,7 @@ test("Ensure proper error handling when mandatory fields are blank", async ({
 }) => {
   //1. Leave mandatory fields (address, payment info) blank
   await welcomePage.navigate(url);
+  await welcomePage.handlePopupIfVisible();
   await welcomePage.clickLoginTab();
   await loginPage.login(username, password);
   await myAccountPage.clickShopTab();

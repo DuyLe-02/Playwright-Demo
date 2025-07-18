@@ -11,6 +11,7 @@ test("Verify users try to buy an item without logging in (As a guest)", async ({
 }) => {
   //1. Open browser and go to BASE_URL
   await welcomePage.navigate(url);
+  await welcomePage.handlePopupIfVisible();
 
   //2. Navigate to 'Shop' or 'Products' section
   await myAccountPage.clickShopTab();
