@@ -13,5 +13,6 @@
     "**/.vscode/**",
     "package.json",
     "tsconfig.json"
-  ]
+  ],
+  "cSpell.words": ["Mavic", "popmake", "spinbutton"]
 }
