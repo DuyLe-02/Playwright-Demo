@@ -31,5 +31,6 @@ export class ElectronicComponentPage {
 
   async goToCart(): Promise<void> {
     await this.cart.click();
+    await this.page.reload();
   }
 }
