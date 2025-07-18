@@ -1,12 +1,12 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Page, Locator } from "@playwright/test";
 
 export class CartPage {
   readonly checkoutButton = this.page.getByRole("link", {
     name: "Proceed to checkout",
   });
-  readonly itemTable = this.page.locator(".table-responsive");
-  readonly clearCartButton = this.page.locator(".clear-cart");
-  readonly loadElement = this.page.locator(".blockUI .blockOverlay");
+  readonly itemTable: Locator = this.page.locator(".table-responsive");
+  readonly clearCartButton: Locator = this.page.locator(".clear-cart");
+  readonly loadElement: Locator = this.page.locator(".blockUI .blockOverlay");
 
   constructor(private page: Page) {}
 
@@ -18,14 +18,14 @@ export class CartPage {
     await expect(this.itemTable).toBeVisible();
   }
 
-  async clickClearCartButton() {
+  async clickClearCartButton(): Promise<void> {
     await this.clearCartButton.click();
     this.page.once("dialog", async (dialog) => {
       await dialog.accept();
     });
   }
 
-  async checkEmptyItemTable() {
+  async checkEmptyItemTable(): Promise<void> {
     await expect(this.itemTable).toHaveCount(0);
   }
 

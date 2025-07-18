@@ -1,17 +1,19 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Page, Locator } from "@playwright/test";
 import { url } from "src/utils/env";
 
 export class ShopPage {
-  readonly addButton = this.page.getByRole("button", { name: "Add to Cart" });
-  readonly cart = this.page.getByRole("link").filter({ hasText: "$" });
-  readonly sortComboBox = this.page.getByRole("combobox", {
+  readonly addButton: Locator = this.page.getByRole("button", {
+    name: "Add to Cart",
+  });
+  readonly cart: Locator = this.page.getByRole("link").filter({ hasText: "$" });
+  readonly sortComboBox: Locator = this.page.getByRole("combobox", {
     name: "Shop order",
   });
-  readonly typeList = this.page.locator(".switch-list");
+  readonly typeList: Locator = this.page.locator(".switch-list");
 
   constructor(private page: Page) {}
 
-  async changeDisplayed() {
+  async changeDisplayed(): Promise<void> {
     await this.typeList.click();
     await this.page.waitForTimeout(1000);
   }
@@ -42,12 +44,12 @@ export class ShopPage {
     }
   }
 
-  async goToCart() {
+  async goToCart(): Promise<void> {
     await this.cart.click();
     await this.page.reload();
   }
 
-  async chooseSortType(sortType: string) {
+  async chooseSortType(sortType: string): Promise<void> {
     const firstBefore = await this.page
       .locator(".products .product")
       .first()
@@ -61,7 +63,7 @@ export class ShopPage {
     }, firstBefore);
   }
 
-  async verifyPricesSorted(order: "asc" | "desc") {
+  async verifyPricesSorted(order: "asc" | "desc"): Promise<void> {
     const products = this.page.locator(".products .product");
     const count = await products.count();
     const prices: number[] = [];

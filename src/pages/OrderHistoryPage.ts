@@ -1,11 +1,11 @@
-import { Page } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import { StringUtils } from "src/utils/Word";
 
 export class OrderHistoryPage {
   constructor(private page: Page) {}
 
-  readonly orderHistoryTable = this.page.getByRole("table");
-  readonly orderHistoryList = this.orderHistoryTable.getByRole("row");
+  readonly orderHistoryTable: Locator = this.page.getByRole("table");
+  readonly orderHistoryList: Locator = this.orderHistoryTable.getByRole("row");
 
   async getOrdersHistoryInfo(): Promise<OrderInfo> {
     const order: OrderInfo = {

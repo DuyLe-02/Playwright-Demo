@@ -1,15 +1,19 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Page, Locator } from "@playwright/test";
 
 export class ProductPage {
   constructor(private page: Page) {}
 
-  readonly reviewTab = this.page.getByRole("link", { name: "Reviews" });
-  readonly reviewTextBox = this.page.getByRole("textbox", {
+  readonly reviewTab: Locator = this.page.getByRole("link", {
+    name: "Reviews",
+  });
+  readonly reviewTextBox: Locator = this.page.getByRole("textbox", {
     name: "Your review",
   });
-  readonly submitButton = this.page.getByRole("button", { name: "Submit" });
+  readonly submitButton: Locator = this.page.getByRole("button", {
+    name: "Submit",
+  });
 
-  async clickReviewTab() {
+  async clickReviewTab(): Promise<void> {
     await this.reviewTab.scrollIntoViewIfNeeded();
     await this.reviewTab.click();
   }
@@ -20,7 +24,7 @@ export class ProductPage {
       .getAttribute("value");
   }
 
-  async submitReview(star: number, reviewText: string) {
+  async submitReview(star: number, reviewText: string): Promise<void> {
     const starLocator = this.page.locator(`.stars a.star-${star}`);
     await starLocator.scrollIntoViewIfNeeded();
     await starLocator.click();
@@ -35,7 +39,10 @@ export class ProductPage {
     await this.reviewTab.click();
   }
 
-  async verifyReview(expectedRating: number, expectedText: string) {
+  async verifyReview(
+    expectedRating: number,
+    expectedText: string
+  ): Promise<void> {
     const reviewBlock = this.page.locator(".comment-text", {
       has: this.page.locator(`.description >> text=${expectedText}`),
     });

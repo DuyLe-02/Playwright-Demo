@@ -10,10 +10,7 @@ test("Verify orders appear in order history", async ({
   orderHistoryPage,
 }) => {
   //Pre-condition
-  //Book Order
-  await page.goto(
-    "https://demo.testarchitect.com/checkout/order-received/12256/?key=wc_order_RGIFpc7LynDqN"
-  );
+
   const detail = await orderPage.getOrderInfo();
 
   //1. Go to My Account page

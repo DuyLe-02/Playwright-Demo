@@ -1,28 +1,31 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Page, Locator } from "@playwright/test";
 
 export class CheckoutPage {
-  readonly firstNameTextBox = this.page.getByRole("textbox", {
+  readonly firstNameTextBox: Locator = this.page.getByRole("textbox", {
     name: "First name *",
   });
-  readonly lastNameTextBox = this.page.getByRole("textbox", {
+  readonly lastNameTextBox: Locator = this.page.getByRole("textbox", {
     name: "Last name *",
   });
-  readonly country_regionDropdown = this.page.locator("#billing_country");
-  readonly streetAddressTextbox = this.page.getByRole("textbox", {
+  readonly country_regionDropdown: Locator =
+    this.page.locator("#billing_country");
+  readonly streetAddressTextbox: Locator = this.page.getByRole("textbox", {
     name: "Street address *",
   });
-  readonly town_cityTextBox = this.page.getByRole("textbox", {
+  readonly town_cityTextBox: Locator = this.page.getByRole("textbox", {
     name: "Town / City *",
   });
-  readonly stateDropdown = this.page.locator("#billing_state");
-  readonly zipCodeTextBox = this.page.getByRole("textbox", {
+  readonly stateDropdown: Locator = this.page.locator("#billing_state");
+  readonly zipCodeTextBox: Locator = this.page.getByRole("textbox", {
     name: "ZIP Code *",
   });
-  readonly phoneTextBox = this.page.getByRole("textbox", { name: "Phone *" });
-  readonly emailAddressTextBox = this.page.getByRole("textbox", {
+  readonly phoneTextBox: Locator = this.page.getByRole("textbox", {
+    name: "Phone *",
+  });
+  readonly emailAddressTextBox: Locator = this.page.getByRole("textbox", {
     name: "Email address *",
   });
-  readonly placeOrderButton = this.page.getByRole("button", {
+  readonly placeOrderButton: Locator = this.page.getByRole("button", {
     name: "Place Order",
   });
 
@@ -46,7 +49,7 @@ export class CheckoutPage {
     await label.click();
   }
 
-  async clickOrderButton() {
+  async clickOrderButton(): Promise<void> {
     await this.placeOrderButton.click();
   }
 
