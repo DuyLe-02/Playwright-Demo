@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { url } from "src/utils/env";
 
 export class MyAccountPage {
   readonly allDepartmentSection: Locator = this.page.locator(
@@ -16,9 +17,6 @@ export class MyAccountPage {
   readonly orderTab: Locator = this.page.getByRole("link", {
     name: " Orders",
   });
-  readonly accountButton: Locator = this.page.locator(
-    ".header-top .login-link"
-  );
 
   constructor(private page: Page) {}
 
@@ -35,7 +33,7 @@ export class MyAccountPage {
     await this.orderTab.click();
   }
 
-  async clickAccountButton(): Promise<void> {
-    await this.accountButton.click();
+  async goToMyAccountPage(): Promise<void> {
+    await this.page.goto(`${url}/my-account`);
   }
 }
